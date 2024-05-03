@@ -14,9 +14,9 @@ class RadiusResource extends Resource
 {
     protected static ?string $model = Radius::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-server-stack';
 
-    protected static ?string $navigationLabel = "Server-Radius";
+    protected static ?string $navigationLabel = "Radius";
 
     protected static ?string $label = "Server";
 
@@ -66,19 +66,24 @@ class RadiusResource extends Resource
             ->sortable(),
             Tables\Columns\TextColumn::make('description')
                 ->label('Descrição')
-                ->searchable(),
+                ->searchable()
+                ->sortable(),
             Tables\Columns\TextColumn::make('name')
                 ->label('Nome')
-                ->searchable(),
+                ->searchable()
+                ->sortable(),
             Tables\Columns\TextColumn::make('client')
                 ->label('Cliente')
-                ->searchable(),
+                ->searchable()
+                ->sortable(),
             Tables\Columns\TextColumn::make('ip_address')
                 ->label('IP')
-                ->searchable(),
+                ->searchable()
+                ->sortable(),
             Tables\Columns\TextColumn::make('technical')
                 ->label('Técnico')
-                ->searchable(),
+                ->searchable()
+                ->sortable(),
             Tables\Columns\TextColumn::make('last_activity')
                 ->label('Última atividade')
                 ->numeric()
