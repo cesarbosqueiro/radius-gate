@@ -10,6 +10,8 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
+use Hasnayeen\Themes\Http\Middleware\SetTheme;
+use Hasnayeen\Themes\ThemesPlugin;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -17,7 +19,10 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Filament\Resources\RadiusResource\Widgets\RadiusOverview; // Importando o widget RadiusOverview
+use App\Filament\Resources\RadiusResource\Widgets\RadiusOverview;
+use pxlrbt\FilamentSpotlight\SpotlightPlugin;
+
+// Importando o widget RadiusOverview
 
 class RadiusPanelProvider extends PanelProvider
 {
@@ -37,9 +42,13 @@ class RadiusPanelProvider extends PanelProvider
                 Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->plugin(
+                ThemesPlugin::make()
+            )
             ->widgets([
                 RadiusOverview::class, // Adicionando o widget RadiusOverview
             ])
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -50,6 +59,7 @@ class RadiusPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                SetTheme::class
             ])
             ->authMiddleware([
                 Authenticate::class,
